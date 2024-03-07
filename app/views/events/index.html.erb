@@ -1,12 +1,11 @@
-<h1>Events</h1>
+<h1>List of Events</h1>
 
-<div id="events">
-  <% @events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "Show this event", event %>
-    </p>
-  <% end %>
-</div>
+<% @events.each do |event| %>
+  <div id="<%= dom_id event %>" class="mb-8">
+    <p><strong>Name:</strong> <%= event.name %></p>
+    <p><strong>Location:</strong> <%= event.location %></p>
+    <p><strong>Date:</strong> <%= event.date %></p>
+  </div>
+<% end %>
 
 <%= link_to "New event", new_event_path %>
