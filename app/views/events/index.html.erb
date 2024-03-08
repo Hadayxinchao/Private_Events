@@ -1,11 +1,16 @@
-<h1>List of Events</h1>
-
-<% @events.each do |event| %>
-  <div id="<%= dom_id event %>" class="mb-8">
-    <p><strong>Name:</strong> <%= event.name %></p>
-    <p><strong>Location:</strong> <%= event.location %></p>
-    <p><strong>Date:</strong> <%= event.date %></p>
-  </div>
+<% if user_signed_in? %>
+  <%= link_to "Sign Out", destroy_user_session_path %>
+  <%= link_to "Profile", user_path(current_user) %>
+<% else %>
+  <%= link_to "Sign In", new_user_session_path %> or <%= link_to "Sign Out", new_user_registration_path %>
 <% end %>
-
-<%= link_to "New event", new_event_path %>
+<h1> Events List </h1>
+<div>
+  <ul>
+    <% @events.each do |event| %>
+      <li>
+        <%= link_to event.name, event_path(event) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

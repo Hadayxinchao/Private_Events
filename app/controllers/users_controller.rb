@@ -1,8 +1,6 @@
-class UsersController < Devise::RegistrationController
-  before_action :authenticate_user!
+class UsersController < ApplicationController
 
   def show  
-    @user = current_user
-    @created_events = @user.events
+    @my_events = Event.where(creator_id: current_user.id)
   end
 end

@@ -1,9 +1,23 @@
-<h1>New event</h1>
-
-<%= render "form", event: @event %>
-
-<br>
-
-<div>
-  <%= link_to "Back to events", events_path %>
-</div>
+<% if @event.errors.any? %>
+  <div id="error_explaination">
+    <h2><%= plularize(@event.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+      <% @event.errors.full_messages do |message| %>
+        <li><%= message %> </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<h1> Create new event: </h1>
+<%= form_with model: @event do |form| %>
+  <%= form.label :name, "Event name:" %>
+  <%= form.text_field :name%>
+  <br>
+  <%= form.label :location, "Event location:" %>
+  <%= form.text_field :location%>
+  <br>
+  <%= form.label :date, "Event date:" %>
+  <%= form.date_field :date%>
+  <br>
+  <%= form.submit 'Create Event' %>
+<% end %>

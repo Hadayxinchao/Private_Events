@@ -1,15 +1,11 @@
-<h1>User Profile</h1>
-
-<p><strong>Email:</strong> <%= @user.email %></p>
-
-<h2>Events Created</h2>
-
-<% if @created_events.any? %>
+<%= link_to "Index Page", events_path %>
+<h1> My Events </h1>
+<div>
   <ul>
-    <% @created_events.each do |event| %>
-      <li><%= event.name %> - <%= event.location %> - <%= event.date.strftime('%B %d, %Y') %></li>
+    <% @my_events.each do |event| %>
+      <li>
+        <%= link_to event.name, event_path(event) %>
+      </li>
     <% end %>
   </ul>
-<% else %>
-  <p>No events created yet.</p>
-<% end %>
+</div>
