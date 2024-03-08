@@ -8,11 +8,16 @@
 <% end %>
 <h1> Events List </h1>
 <div>
-  <ul>
-    <% @events.each do |event| %>
-      <li>
-        <%= link_to event.name, event_path(event) %>
-      </li>
-    <% end %>
-  </ul>
+  <h2> Attended Events </h2>
+    <ul>
+      <h4> Past Events: </h4>
+      <% Event.upcoming_events.each do |event| %>
+        <li><%= link_to event.name, event_path(event) %> </li>
+      <% end %>
+
+      <h4> Upcoming Events: </h4>
+      <% Event.past_events.each do |event| %>
+        <li><%= link_to event.name, event_path(event) %> </li>
+      <% end %>
+    </ul>
 </div>

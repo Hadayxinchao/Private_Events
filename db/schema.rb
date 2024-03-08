@@ -19,10 +19,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_071622) do
     t.integer "attendee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
     t.index ["event_id", "attendee_id"], name: "index_event_attendees_on_event_id_and_attendee_id", unique: true
     t.index ["event_id"], name: "index_event_attendees_on_event_id"
-    t.index ["user_id"], name: "index_event_attendees_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -47,5 +45,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_08_071622) do
   end
 
   add_foreign_key "event_attendees", "events"
-  add_foreign_key "event_attendees", "users"
 end
