@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "events#index"
-  resources :events
+  resources :events do
+    resources :event_attendees, only: [:create, :destroy]
+  end
   resource :users, only: [:show]
-  resources :event_attendees, only: [:create]
+  
 
   post 'join' => 'event_attendees#create'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

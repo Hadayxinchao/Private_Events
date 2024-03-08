@@ -10,7 +10,7 @@
   <%= form.hidden_field :event_id, value: @event.id %>
   <%= form.submit 'Join this event' %>
 <% end %>
-<h6> Attendees </h6>
+<h2> Attendees </h2>
 <ul>
   <% @event.attendees.each do |attendee| %>
     <li><%= attendee.email %> </li>
