@@ -1,10 +1,11 @@
 <%= link_to "Index Page", events_path %>
 <% if user_signed_in? %>
- <%= link_to "Profile", users_path(current_user) %>
+  <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+  <%= link_to "Profile", users_path(current_user) %>
 <% end %>
 <h1><%= @event.name %> </h1>  
-<h6>Location: <%= @event.location %></h6>
-<h6>Date: <%= @event.date %> </h6>
+<h2>Location: <%= @event.location %></h2>
+<h2>Date: <%= @event.date %> </h2>
 <%= form_with url: '/join', method: :post do |form| %>
   <%= form.hidden_field :event_id, value: @event.id %>
   <%= form.submit 'Join this event' %>

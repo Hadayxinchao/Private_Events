@@ -1,3 +1,7 @@
+<% if user_signed_in? %>
+  <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+  <%= link_to "Profile", users_path(current_user) %>
+<% end %>
 <% if @event.errors.any? %>
   <div id="error_explaination">
     <h2><%= plularize(@event.errors.count, "error") %> prohibited this user from being saved:</h2>

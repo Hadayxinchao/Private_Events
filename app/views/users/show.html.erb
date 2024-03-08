@@ -1,4 +1,8 @@
 <%= link_to "Index Page", events_path %>
+<% if user_signed_in? %>
+  <%= link_to 'Create event', new_event_path %>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+<% end %>
 <h1> My Events </h1>
 <div>
   <ul>
@@ -9,10 +13,17 @@
     <% end %>
   </ul>
 </div>
+<%= link_to "Create New Events", new_event_path %>
 <div>
-  <h3> Attended Events </h3>
+  <h2> Attended Events </h2>
   <ul>
-    <% current_user.attended_events.where("").each do |event| %>
+    <h4> Past Events: </h4>
+    <% current_user.attended_events.where("date < ?", Time.now).each do |event| %>
+      <li><%= link_to event.name, event_path(event) %> </li>
+    <% end %>
+
+    <h4> Upcoming Events: </h4>
+    <% current_user.attended_events.where("date > ?", Time.now).each do |event| %>
       <li><%= link_to event.name, event_path(event) %> </li>
     <% end %>
   </ul>
