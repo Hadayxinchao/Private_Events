@@ -9,3 +9,11 @@
     <% end %>
   </ul>
 </div>
+<div>
+  <h3> Attended Events </h3>
+  <ul>
+    <% current_user.attended_events.where("").each do |event| %>
+      <li><%= link_to event.name, event_path(event) %> </li>
+    <% end %>
+  </ul>
+</div>

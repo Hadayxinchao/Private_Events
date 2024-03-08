@@ -1,7 +1,17 @@
 <%= link_to "Index Page", events_path %>
 <% if user_signed_in? %>
- <%= link_to "Profile", user_path(current_user) %>
+ <%= link_to "Profile", users_path(current_user) %>
 <% end %>
-<h1><%= @event.name %> </h1>
+<h1><%= @event.name %> </h1>  
 <h6>Location: <%= @event.location %></h6>
 <h6>Date: <%= @event.date %> </h6>
+<%= form_with url: '/join', method: :post do |form| %>
+  <%= form.hidden_field :event_id, value: @event.id %>
+  <%= form.submit 'Join this event' %>
+<% end %>
+<h6> Attendees </h6>
+<ul>
+  <% @event.attendees.each do |attendee| %>
+    <li><%= attendee.email %> </li>
+  <% end %>
+</ul>

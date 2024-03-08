@@ -1,8 +1,9 @@
 <% if user_signed_in? %>
-  <%= link_to "Sign Out", destroy_user_session_path %>
-  <%= link_to "Profile", user_path(current_user) %>
+  <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+  <%= link_to "Profile", users_path(current_user) %>
 <% else %>
-  <%= link_to "Sign In", new_user_session_path %> or <%= link_to "Sign Out", new_user_registration_path %>
+  <%= link_to "Sign In", new_user_session_path %>
+  <%= link_to "Sign Up", new_user_registration_path %>
 <% end %>
 <h1> Events List </h1>
 <div>

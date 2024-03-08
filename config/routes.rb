@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :events
-  resource :user, only: [:show]
   root to: "events#index"
-  
+  resources :events, only: [:index, :new, :create, :show]
+  resource :users, only: [:show]
+  resources :event_attendees, only: [:create]
+
+  post 'join' => 'event_attendees#create'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
