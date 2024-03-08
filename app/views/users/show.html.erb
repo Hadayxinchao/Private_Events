@@ -9,6 +9,8 @@
     <% @my_events.each do |event| %>
       <li>
         <%= link_to event.name, event_path(event) %>
+        <%= button_to 'Edit Event', edit_event_path(event), method: :get %>
+        <%= button_to 'Delete Event', event, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
       </li>
     <% end %>
   </ul>

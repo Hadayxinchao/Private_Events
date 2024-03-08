@@ -1,0 +1,23 @@
+<% if event.errors.any? %>
+  <div id="error_explaination">
+    <h2><%= plularize(event.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+      <% event.errors.full_messages do |message| %>
+        <li><%= message %> </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: event do |form| %>
+  <%= form.label :name, "Event name:" %>
+  <%= form.text_field :name %>
+  <br>
+  <%= form.label :location, "Event location:" %>
+  <%= form.text_field :location %>
+  <br>
+  <%= form.label :date, "Event date:" %>
+  <%= form.datetime_field :date %>
+  <br>
+  <%= form.submit %>
+<% end %>
