@@ -4,8 +4,13 @@ class EventAttendeesController < ApplicationController
   def create
     if Event.exists?(params[:event_id])
       event = Event.find(params[:event_id])
-      event.attendees << current_user
-      redirect_to event_path(event)
+      if event.attendees.exists?(current_user.id)
+        redirect_to event_path(event)
+      else
+        event.attendees << current_user
+        redirect_to event_path(event)
+      end
+    
     else
       render 'errors/event_not_found', status: :not_found
     end
