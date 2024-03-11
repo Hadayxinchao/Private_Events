@@ -4,7 +4,7 @@
   <%= link_to "Profile", users_path(current_user) %>
   <% if @event.private && current_user.id == @event.creator_id %>
     <%= form_with(url: invite_event_path(@event), method: :post) do |f| %>
-      <%= f.label :member_id, placeholder: "Enter your friend's id here to invite" %>
+      <%= f.label :member_id, "Invite Member: " %>
       <%= f.text_field :member_id %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.submit 'Invite User' %>
