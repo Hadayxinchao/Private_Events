@@ -2,6 +2,14 @@
 <% if user_signed_in? %>
   <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
   <%= link_to "Profile", users_path(current_user) %>
+  <% if @event.private && current_user.id == @event.creator_id %>
+    <%= form_with(url: invite_event_path(@event), method: :post) do |f| %>
+      <%= f.label :member_id, placeholder: "Enter your friend's id here to invite" %>
+      <%= f.text_field :member_id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.submit 'Invite User' %>
+    <% end %>
+  <% end %>
 <% end %>
 <h1><%= @event.name %> </h1>  
 <h2>Location: <%= @event.location %></h2>

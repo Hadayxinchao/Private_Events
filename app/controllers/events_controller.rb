@@ -53,6 +53,17 @@ class EventsController < ApplicationController
       redirect_to events_path, alert: 'Event can not destroyed.'
     end
   end
+  
+  def invite
+    @event = current_user.events.find(params[:id])
+    invited_user = User.find(params[:member_id])
+    if invited_user
+      EventAttendee.create(event_id: @event.id, attendee_id: invited_user.id)
+      redirect_to @event, notice: 'User was successfully invited to the event'
+    else
+      redirect_to events_path, alert: 'User id invalid'
+    end
+  end
 
   private
     # Only allow a list of trusted parameters through.

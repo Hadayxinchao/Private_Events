@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "events#index"
   resources :events do
     resources :event_attendees, only: [:create, :destroy]
+    post 'invite', on: :member
   end
   resource :users, only: [:show]
   
