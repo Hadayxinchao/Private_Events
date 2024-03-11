@@ -16,6 +16,15 @@ class EventAttendeesController < ApplicationController
     end
   end
 
+  def destroy
+    @event_attendee = current_user.event_attendees.find_by(event_id: params[:event_id])
+    if @attendance.destroy
+      redirect_to event_path(params[:event_id]), notice: 'Successfully removed yourself from the event.'
+    else
+      redirect_to event_path(params[:event_id]), alert: 'Failed to remove yourself from the event.'
+    end
+  end
+
   private
   
   def join_event_params

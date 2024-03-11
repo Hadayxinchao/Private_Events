@@ -1,6 +1,6 @@
 <% if event.errors.any? %>
   <div id="error_explaination">
-    <h2><%= plularize(event.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <h2><%= pluralize(event.errors.count, "error") %> prohibited this user from being saved:</h2>
     <ul>
       <% event.errors.full_messages do |message| %>
         <li><%= message %> </li>
@@ -19,5 +19,9 @@
   <%= form.label :date, "Event date:" %>
   <%= form.datetime_field :date %>
   <br>
+  <%= form.label :private %>
+  <%= form.check_box :private %>
+  <br>
+  <%= form.hidden_field :creator_id, value: current_user.id %>
   <%= form.submit %>
 <% end %>

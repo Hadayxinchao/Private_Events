@@ -12,12 +12,24 @@
     <ul>
       <h4> Past Events: </h4>
       <% Event.upcoming_events.each do |event| %>
-        <li><%= link_to event.name, event_path(event) %> </li>
+        <% if !event.private? || (current_user && event.creator_id == current_user.id) %>
+          <li><%= link_to event.name, event_path(event) %> </li>
+          <% if event.creator_id == current_user.id %>
+            <%= link_to 'Edit', edit_event_path(event) %>
+            <%= link_to 'Delete', event, method: :delete, data: { turbo_confirm: "Are you sure" } %>
+          <% end %>
+        <% end %>
       <% end %>
 
       <h4> Upcoming Events: </h4>
       <% Event.past_events.each do |event| %>
-        <li><%= link_to event.name, event_path(event) %> </li>
+        <% if !event.private? || (current_user && event.creator_id == current_user.id) %>
+          <li><%= link_to event.name, event_path(event) %> </li>
+          <% if event.creator_id == current_user.id %>
+            <%= link_to 'Edit', edit_event_path(event) %>
+            <%= link_to 'Delete', event, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+          <% end %>
+        <% end %>
       <% end %>
     </ul>
 </div>

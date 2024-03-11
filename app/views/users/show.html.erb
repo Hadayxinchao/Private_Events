@@ -21,7 +21,10 @@
   <ul>
     <h4> Upcoming Events: </h4>
     <% current_user.attended_events.upcoming_events.each do |event| %>
-      <li><%= link_to event.name, event_path(event) %> </li>
+      <li>
+        <%= link_to event.name, event_path(event) %>
+        <%= button_to 'Remove Attendance', event, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+      </li>
     <% end %>
 
     <h4> Past Events: </h4>
@@ -29,4 +32,4 @@
       <li><%= link_to event.name, event_path(event) %> </li>
     <% end %>
   </ul>
-</div>
+</div>  
